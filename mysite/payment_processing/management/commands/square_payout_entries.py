@@ -3,8 +3,8 @@ from square.http.auth.o_auth_2 import BearerAuthCredentials
 from payment_processing.models import PaymentTransactions
 from square.client import Client
 
-sandbox_token = 'EAAAl51Ah6ogt8nrKM0C-ldw4f_fERzC91gkQXqx82xv5et97YDjuP73ECG_xayH'
-production_token = 'EAAAl-HYUYo9dYxZZoqW_3CsrUAu8tQSJ5RB6BI5zwpfOtKACwQ7wqwgbstBU0N7'
+sandbox_token = 'Sanbox_Key'
+production_token = 'Production_Key'
 
 client = Client(
     bearer_auth_credentials=BearerAuthCredentials(
