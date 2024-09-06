@@ -1,0 +1,250 @@
+{
+  "payments": [
+    {
+      "id": "9sjy2UNe4RMgY3pderkuYekqUjAZY",
+      "created_at": "2024-08-16T21:36:11.210Z",
+      "updated_at": "2024-08-16T21:36:11.357Z",
+      "amount_money": { "amount": 1200, "currency": "USD" },
+      "status": "COMPLETED",
+      "source_type": "CASH",
+      "location_id": "LD6MKAX2FKMTY",
+      "order_id": "x5zAKXWi0um2EERFkUn2ICsUBcMZY",
+      "note": "Cash test",
+      "customer_id": "Z3ZP20YCZRE3CKXAK650KK1M3C",
+      "total_money": { "amount": 1200, "currency": "USD" },
+      "employee_id": "TMUBiBbX_1iPw3aV",
+      "capabilities": [
+        "EDIT_AMOUNT_UP",
+        "EDIT_AMOUNT_DOWN",
+        "EDIT_TIP_AMOUNT_UP",
+        "EDIT_TIP_AMOUNT_DOWN"
+      ],
+      "cash_details": {
+        "buyer_supplied_money": { "amount": 1200, "currency": "USD" },
+        "change_back_money": { "amount": 0, "currency": "USD" }
+      },
+      "receipt_number": "9sjy",
+      "receipt_url": "https://squareupsandbox.com/receipt/preview/9sjy2UNe4RMgY3pderkuYekqUjAZY",
+      "team_member_id": "TMUBiBbX_1iPw3aV",
+      "application_details": {
+        "square_product": "VIRTUAL_TERMINAL",
+        "application_id": "sandbox-sq0idb-BbZvlaIkgSYnVUI4rpSedg"
+      },
+      "version_token": "k9yOz8VwgR8GXypSB3VEI1NuvHAJWORjwr3XcEJqwbE6o"
+    },
+    {
+      "id": "L3B4Q9ICVFvQBpeS1v4Ct1EKL8WZY",
+      "created_at": "2024-08-16T21:34:52.619Z",
+      "updated_at": "2024-08-16T21:34:53.837Z",
+      "amount_money": { "amount": 3500, "currency": "USD" },
+      "status": "COMPLETED",
+      "delay_duration": "PT168H",
+      "source_type": "CARD",
+      "card_details": {
+        "status": "CAPTURED",
+        "card": {
+          "card_brand": "DISCOVER",
+          "last_4": "0004",
+          "exp_month": 12,
+          "exp_year": 2025,
+          "fingerprint": "sq-1-fkz8XcskbpDCmOzIW61pSFkr-NKldFGDfVJlGczaldMI1EdNf7-6HxNKHaYxbQWhfw",
+          "card_type": "CREDIT",
+          "prepaid_type": "NOT_PREPAID",
+          "bin": "601100"
+        },
+        "entry_method": "KEYED",
+        "cvv_status": "CVV_ACCEPTED",
+        "avs_status": "AVS_ACCEPTED",
+        "statement_description": "SQ *DEFAULT TEST ACCOUNT",
+        "card_payment_timeline": {
+          "authorized_at": "2024-08-16T21:34:52.745Z",
+          "captured_at": "2024-08-16T21:34:52.902Z"
+        }
+      },
+      "location_id": "LD6MKAX2FKMTY",
+      "order_id": "tN4ZcnRjcYxtgOYqSh0wubPN8d6YY",
+      "processing_fee": [
+        {
+          "effective_at": "2024-08-16T23:34:53.000Z",
+          "type": "INITIAL",
+          "amount_money": { "amount": 138, "currency": "USD" }
+        }
+      ],
+      "note": "3rd test",
+      "customer_id": "N9CG66CNGZ6ZZ00V13CQPATWEG",
+      "total_money": { "amount": 3500, "currency": "USD" },
+      "approved_money": { "amount": 3500, "currency": "USD" },
+      "employee_id": "TMUBiBbX_1iPw3aV",
+      "receipt_number": "L3B4",
+      "receipt_url": "https://squareupsandbox.com/receipt/preview/L3B4Q9ICVFvQBpeS1v4Ct1EKL8WZY",
+      "delay_action": "CANCEL",
+      "delayed_until": "2024-08-23T21:34:52.619Z",
+      "team_member_id": "TMUBiBbX_1iPw3aV",
+      "application_details": {
+        "square_product": "VIRTUAL_TERMINAL",
+        "application_id": "sandbox-sq0idb-BbZvlaIkgSYnVUI4rpSedg"
+      },
+      "version_token": "6ayMnncxD2K8R6w6VI1SXx4m9RwSOyyngulXH1Bz3iI6o"
+    },
+    {
+      "id": "z5O7G2aNf0QYQBmh296VToQxpNRZY",
+      "created_at": "2024-08-16T21:33:13.941Z",
+      "updated_at": "2024-08-16T21:33:15.198Z",
+      "amount_money": { "amount": 1500, "currency": "USD" },
+      "status": "COMPLETED",
+      "delay_duration": "PT168H",
+      "source_type": "CARD",
+      "card_details": {
+        "status": "CAPTURED",
+        "card": {
+          "card_brand": "MASTERCARD",
+          "last_4": "5100",
+          "exp_month": 4,
+          "exp_year": 2026,
+          "fingerprint": "sq-1-lstNByb_lcvihhScy0bxVWfuAbmwIGw37ptba2lswTeGGpLgo-KEDmIUGCbLwhiWWw",
+          "card_type": "CREDIT",
+          "prepaid_type": "NOT_PREPAID",
+          "bin": "510510"
+        },
+        "entry_method": "KEYED",
+        "cvv_status": "CVV_ACCEPTED",
+        "avs_status": "AVS_ACCEPTED",
+        "statement_description": "SQ *DEFAULT TEST ACCOUNT",
+        "card_payment_timeline": {
+          "authorized_at": "2024-08-16T21:33:14.062Z",
+          "captured_at": "2024-08-16T21:33:14.226Z"
+        }
+      },
+      "location_id": "LD6MKAX2FKMTY",
+      "order_id": "P6kcYI1XIz4DFMeZQvOJtlaPWJGZY",
+      "processing_fee": [
+        {
+          "effective_at": "2024-08-16T23:33:15.000Z",
+          "type": "INITIAL",
+          "amount_money": { "amount": 68, "currency": "USD" }
+        }
+      ],
+      "note": "Second Test",
+      "total_money": { "amount": 1500, "currency": "USD" },
+      "approved_money": { "amount": 1500, "currency": "USD" },
+      "employee_id": "TMUBiBbX_1iPw3aV",
+      "receipt_number": "z5O7",
+      "receipt_url": "https://squareupsandbox.com/receipt/preview/z5O7G2aNf0QYQBmh296VToQxpNRZY",
+      "delay_action": "CANCEL",
+      "delayed_until": "2024-08-23T21:33:13.941Z",
+      "team_member_id": "TMUBiBbX_1iPw3aV",
+      "application_details": {
+        "square_product": "VIRTUAL_TERMINAL",
+        "application_id": "sandbox-sq0idb-BbZvlaIkgSYnVUI4rpSedg"
+      },
+      "version_token": "TUzrj6XpKkvqIcu0HKcgofT8De1ICyYENxogZ9dVeA85o"
+    },
+    {
+      "id": "jVoh7EiZFy4gRJ2qvpiks9bj0MVZY",
+      "created_at": "2024-08-16T21:32:16.362Z",
+      "updated_at": "2024-08-16T21:32:17.879Z",
+      "amount_money": { "amount": 2300, "currency": "USD" },
+      "status": "COMPLETED",
+      "delay_duration": "PT168H",
+      "source_type": "CARD",
+      "card_details": {
+        "status": "CAPTURED",
+        "card": {
+          "card_brand": "VISA",
+          "last_4": "1111",
+          "exp_month": 7,
+          "exp_year": 2025,
+          "fingerprint": "sq-1-8XjJ7HMvDcgGvYRytuQKHPhz_Oj9W7j4XX-xC2CbtAiJPXIcD5poUAkhF1BoSp9THg",
+          "card_type": "CREDIT",
+          "prepaid_type": "NOT_PREPAID",
+          "bin": "411111"
+        },
+        "entry_method": "KEYED",
+        "cvv_status": "CVV_ACCEPTED",
+        "avs_status": "AVS_ACCEPTED",
+        "statement_description": "SQ *DEFAULT TEST ACCOUNT",
+        "card_payment_timeline": {
+          "authorized_at": "2024-08-16T21:32:16.487Z",
+          "captured_at": "2024-08-16T21:32:16.656Z"
+        }
+      },
+      "location_id": "LD6MKAX2FKMTY",
+      "order_id": "feyWzrneS09vdYI6KqBVtANLphDZY",
+      "processing_fee": [
+        {
+          "effective_at": "2024-08-16T23:32:17.000Z",
+          "type": "INITIAL",
+          "amount_money": { "amount": 96, "currency": "USD" }
+        }
+      ],
+      "note": "First Test",
+      "total_money": { "amount": 2300, "currency": "USD" },
+      "approved_money": { "amount": 2300, "currency": "USD" },
+      "employee_id": "TMUBiBbX_1iPw3aV",
+      "receipt_number": "jVoh",
+      "receipt_url": "https://squareupsandbox.com/receipt/preview/jVoh7EiZFy4gRJ2qvpiks9bj0MVZY",
+      "delay_action": "CANCEL",
+      "delayed_until": "2024-08-23T21:32:16.362Z",
+      "team_member_id": "TMUBiBbX_1iPw3aV",
+      "application_details": {
+        "square_product": "VIRTUAL_TERMINAL",
+        "application_id": "sandbox-sq0idb-BbZvlaIkgSYnVUI4rpSedg"
+      },
+      "version_token": "Njf9oaH150CcXQLkJtvq55QLZpaRaAod30fs03DeERO6o"
+    },
+    {
+      "id": "rvb76yovoYQVUgDXVMEdo5v2JHJZY",
+      "created_at": "2024-08-14T22:42:03.102Z",
+      "updated_at": "2024-08-14T22:42:03.931Z",
+      "amount_money": { "amount": 100, "currency": "USD" },
+      "status": "COMPLETED",
+      "delay_duration": "PT168H",
+      "source_type": "CARD",
+      "card_details": {
+        "status": "CAPTURED",
+        "card": {
+          "card_brand": "VISA",
+          "last_4": "5858",
+          "exp_month": 8,
+          "exp_year": 2026,
+          "fingerprint": "sq-1-JWTRTSLoySbEn68DLE0NmHkUyVLELsoWI4fRKmTL8qWz0IFiiv24A7rW49TNMMYVyA",
+          "card_type": "CREDIT",
+          "prepaid_type": "NOT_PREPAID",
+          "bin": "453275"
+        },
+        "entry_method": "KEYED",
+        "cvv_status": "CVV_ACCEPTED",
+        "avs_status": "AVS_ACCEPTED",
+        "statement_description": "SQ *DEFAULT TEST ACCOUNT",
+        "card_payment_timeline": {
+          "authorized_at": "2024-08-14T22:42:03.226Z",
+          "captured_at": "2024-08-14T22:42:03.395Z"
+        }
+      },
+      "location_id": "LD6MKAX2FKMTY",
+      "order_id": "NRypwfnphYlXgF9ujCNjaqmagLGZY",
+      "risk_evaluation": {
+        "created_at": "2024-08-14T22:42:03.226Z",
+        "risk_level": "NORMAL"
+      },
+      "processing_fee": [
+        {
+          "effective_at": "2024-08-15T00:42:03.000Z",
+          "type": "INITIAL",
+          "amount_money": { "amount": 33, "currency": "USD" }
+        }
+      ],
+      "total_money": { "amount": 100, "currency": "USD" },
+      "approved_money": { "amount": 100, "currency": "USD" },
+      "receipt_number": "rvb7",
+      "receipt_url": "https://squareupsandbox.com/receipt/preview/rvb76yovoYQVUgDXVMEdo5v2JHJZY",
+      "delay_action": "CANCEL",
+      "delayed_until": "2024-08-21T22:42:03.102Z",
+      "application_details": {
+        "square_product": "ECOMMERCE_API",
+        "application_id": "sandbox-sq0idb-LWJ6BU4lrskpU9HOrNcapQ"
+      },
+      "version_token": "VxEdtQRNH6s6X5xnjvkcwIp7F91Na8Y7pse451Ak4R06o"
+    }
+  ]
+}
