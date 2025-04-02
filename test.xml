@@ -1,0 +1,285 @@
+<Order>
+  <OrderHead>
+    <Parameters>
+      <Language>en-US</Language>
+      <DecimalSeparator>.</DecimalSeparator>
+      <Precision>2</Precision>
+    </Parameters>
+    <OrderType Code="PUO">Purchase Order</OrderType>
+    <SaleType Code="2">Collect Later</SaleType>
+    <FollowUpRequired>0</FollowUpRequired>
+    <OrderCurrency>
+      <Currency Code="USD"></Currency>
+    </OrderCurrency>
+    <Source Code="2">WSAPI</Source>
+    <Checksum />
+    <TaxCalculatedAtSource>1</TaxCalculatedAtSource>
+  </OrderHead>
+  <OrderReferences>
+    <TermsConditions />
+    <BuyersOrderNumber>526730-00576062</BuyersOrderNumber>
+  </OrderReferences>
+  <WebTrackUser UserID="27" VATInclusive="FALSE">
+    <Name>Shane Hoefer</Name>
+    <Email>shoefer@rmfp.com</Email>
+    <WebTrackTradingBranchID>2</WebTrackTradingBranchID>
+  </WebTrackUser>
+  <WebTrack InstanceID="0" />
+  <OrderDate>2025-01-27T22:24:37</OrderDate>
+  <Buyer>
+    <BuyerReferences>
+      <SuppliersCodeForBuyer>13215</SuppliersCodeForBuyer>
+      <TaxNumber></TaxNumber>
+      <GLN>-1</GLN>
+    </BuyerReferences>
+    <Party>Colter Test2</Party>
+    <Address>
+      <City></City>
+      <State></State>
+      <PostCode></PostCode>
+    </Address>
+    <Contact>
+      <Name>Colter Test2</Name>
+      <DDI>(509) 368 - 1868</DDI>
+      <Fax></Fax>
+      <Email></Email>
+    </Contact>
+  </Buyer>
+  <Delivery>
+    <DeliverTo>
+      <DeliverToReferences>
+        <BuyersCodeForLocation></BuyersCodeForLocation>
+        <GLN></GLN>
+        <Store></Store>
+        <DistributionCenter></DistributionCenter>
+        <DeliveryArea>0</DeliveryArea>
+      </DeliverToReferences>
+      <Party></Party>
+      <Address>
+        <City>Erie</City>
+        <State>CO</State>
+        <PostCode>80516</PostCode>
+        <AddressLine>1000 Stanley Ct</AddressLine>
+      </Address>
+    </DeliverTo>
+    <EarliestAcceptableDate></EarliestAcceptableDate>
+    <LatestAcceptableDate></LatestAcceptableDate>
+    <DeliveryInformation></DeliveryInformation>
+    <DeliveryInformation></DeliveryInformation>
+    <DeliveryInformation></DeliveryInformation>
+    <DeliveryInformation></DeliveryInformation>
+    <SpecialInstructions></SpecialInstructions>
+    <HeaderNotes></HeaderNotes>
+  </Delivery>
+  <InvoiceTo>
+    <InvoiceToReferences>
+      <GLN></GLN>
+    </InvoiceToReferences>
+    <Address>
+      <City></City>
+      <State></State>
+      <PostCode></PostCode>
+    </Address>
+  </InvoiceTo>
+  <Settlement>
+    <CardDetails>
+      <CardType></CardType>
+      <Issuer></Issuer>
+      <Address>
+        <HouseNumber />
+        <PostCode />
+      </Address>
+      <ValidFrom></ValidFrom>
+      <ExpiresEnd></ExpiresEnd>
+      <IssueNumber />
+      <CardNumber></CardNumber>
+      <AuthorisationCode></AuthorisationCode>
+    </CardDetails>
+  </Settlement>
+  <WebTrackPayment>
+    <Source />
+    <WebTrackPaymentCode></WebTrackPaymentCode>
+    <ProviderSecurityCode></ProviderSecurityCode>
+    <ProviderPaymentCode></ProviderPaymentCode>
+    <MerchantReceiptText></MerchantReceiptText>
+    <CustomerReceiptText></CustomerReceiptText>
+    <AdditionalCardInfo></AdditionalCardInfo>
+  </WebTrackPayment>
+  <OrderTotal>
+    <GoodsValue>17.00</GoodsValue>
+    <AmountPaid>0.00</AmountPaid>
+  </OrderTotal>
+  <TaxAreaID />
+  <AutoCompleteMe>0</AutoCompleteMe>
+  <OrderLine InSection="0">
+    <LineNumber>1</LineNumber>
+    <Product>
+      <SuppliersProductCode>SO</SuppliersProductCode>
+      <BuyersProductCode></BuyersProductCode>
+      <GTIN></GTIN>
+      <Description>*SO* TEST1</Description>
+      <Properties>
+        <Length UOMCode="">0</Length>
+        <Width UOMCode="">0</Width>
+        <Depth UOMCode="">0</Depth>
+      </Properties>
+    </Product>
+    <Quantity UOMCode="ea">
+      <Amount>4.0000</Amount>
+      <Tally></Tally>
+    </Quantity>
+    <Price UOMCode="ea">
+      <UnitPrice TaxValue="0.25">1.00</UnitPrice>
+      <Discount1>0.0</Discount1>
+      <Discount2>0.0</Discount2>
+    </Price>
+    <ManufacturingOptions></ManufacturingOptions>
+    <Reference>00576062</Reference>
+    <Narrative></Narrative>
+    <LineTax>
+      <TaxRate Code="S">0.00</TaxRate>
+      <TaxValue>1.00</TaxValue>
+    </LineTax>
+    <LineTaxes>
+      <LineTax>
+        <TaxRate Code="6.5%">8.68</TaxRate>
+        <TaxValue>0.35</TaxValue>
+      </LineTax>
+    </LineTaxes>
+  </OrderLine>
+  <OrderLine InSection="0">
+    <LineNumber>2</LineNumber>
+    <Product>
+      <SuppliersProductCode>SO</SuppliersProductCode>
+      <BuyersProductCode></BuyersProductCode>
+      <GTIN></GTIN>
+      <Description>*SO* TEST2</Description>
+      <Properties>
+        <Length UOMCode="">0</Length>
+        <Width UOMCode="">0</Width>
+        <Depth UOMCode="">0</Depth>
+      </Properties>
+    </Product>
+    <Quantity UOMCode="ea">
+      <Amount>4.0000</Amount>
+      <Tally></Tally>
+    </Quantity>
+    <Price UOMCode="ea">
+      <UnitPrice TaxValue="0.25">1.00</UnitPrice>
+      <Discount1>0.0</Discount1>
+      <Discount2>0.0</Discount2>
+    </Price>
+    <ManufacturingOptions></ManufacturingOptions>
+    <Reference>00576062</Reference>
+    <Narrative></Narrative>
+    <LineTax>
+      <TaxRate Code="S">0.00</TaxRate>
+      <TaxValue>1.00</TaxValue>
+    </LineTax>
+    <LineTaxes>
+      <LineTax>
+        <TaxRate Code="6.5%">8.68</TaxRate>
+        <TaxValue>0.35</TaxValue>
+      </LineTax>
+    </LineTaxes>
+  </OrderLine>
+  <OrderLine InSection="0">
+    <LineNumber>3</LineNumber>
+    <Product>
+      <SuppliersProductCode>SO</SuppliersProductCode>
+      <BuyersProductCode></BuyersProductCode>
+      <GTIN></GTIN>
+      <Description>*SO* TEST3</Description>
+      <Properties>
+        <Length UOMCode="">0</Length>
+        <Width UOMCode="">0</Width>
+        <Depth UOMCode="">0</Depth>
+      </Properties>
+    </Product>
+    <Quantity UOMCode="ea">
+      <Amount>4.0000</Amount>
+      <Tally></Tally>
+    </Quantity>
+    <Price UOMCode="ea">
+      <UnitPrice TaxValue="0.25">1.00</UnitPrice>
+      <Discount1>0.0</Discount1>
+      <Discount2>0.0</Discount2>
+    </Price>
+    <ManufacturingOptions></ManufacturingOptions>
+    <Reference>00576062</Reference>
+    <Narrative></Narrative>
+    <LineTax>
+      <TaxRate Code="S">0.00</TaxRate>
+      <TaxValue>1.00</TaxValue>
+    </LineTax>
+    <LineTaxes>
+      <LineTax>
+        <TaxRate Code="6.5%">8.68</TaxRate>
+        <TaxValue>0.35</TaxValue>
+      </LineTax>
+    </LineTaxes>
+  </OrderLine>
+  <OrderLine InSection="0">
+    <LineNumber>4</LineNumber>
+    <Product>
+      <SuppliersProductCode>Product Placeholder</SuppliersProductCode>
+      <BuyersProductCode></BuyersProductCode>
+      <GTIN></GTIN>
+      <Description>NOTE</Description>
+      <Properties>
+        <Length UOMCode="">0</Length>
+        <Width UOMCode="">0</Width>
+        <Depth UOMCode="">0</Depth>
+      </Properties>
+    </Product>
+    <Quantity UOMCode="ea">
+      <Amount>1.0000</Amount>
+      <Tally></Tally>
+    </Quantity>
+    <Price UOMCode="ea">
+      <UnitPrice TaxValue="0.25">0.00</UnitPrice>
+      <Discount1>0.0</Discount1>
+      <Discount2>0.0</Discount2>
+    </Price>
+    <ManufacturingOptions></ManufacturingOptions>
+    <Reference>00576062</Reference>
+    <Narrative></Narrative>
+    <LineTax>
+      <TaxRate Code="S">0.00</TaxRate>
+      <TaxValue>1.00</TaxValue>
+    </LineTax>
+    <LineTaxes>
+      <LineTax>
+        <TaxRate Code="6.5%">8.68</TaxRate>
+        <TaxValue>-0.01</TaxValue>
+      </LineTax>
+    </LineTaxes>
+  </OrderLine>
+  <OrderLine TypeCode="DELV">
+    <LineNumber>5</LineNumber>
+    <Product>
+      <SuppliersProductCode>1</SuppliersProductCode>
+      <BuyersProductCode></BuyersProductCode>
+      <GTIN></GTIN>
+      <Description>Delivery</Description>
+      <Properties></Properties>
+    </Product>
+    <Quantity UOMCode="">
+      <Amount>1</Amount>
+      <Tally></Tally>
+    </Quantity>
+    <Price UOMCode="ea">
+      <UnitPrice TaxValue="0.00">5.00</UnitPrice>
+      <Discount1></Discount1>
+      <Discount2></Discount2>
+      <UnitCost>0.00</UnitCost>
+    </Price>
+    <ManufacturingOptions></ManufacturingOptions>
+    <Reference></Reference>
+    <Narrative></Narrative>
+    <LineTax>
+      <TaxRate Code="S">0.00</TaxRate>
+      <TaxValue>0.00</TaxValue>
+    </LineTax>
+  </OrderLine>
+</Order>

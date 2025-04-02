@@ -43,15 +43,15 @@ def clean_phone(phone_raw):
 class Command(BaseCommand):
     def handle(self, *args, **options):
 
-        campaign_code = 'Google Ads Jul24'
+        campaign_code = 'Google Ads Sep24'
 
-        uploaded_file_name = 'Callrail-GoogleAds-JUL2024.csv'
+        uploaded_file_name = 'Callrail-GoogleAds-SEP2024.csv'
 
         # Get, open and read file - use file path
         """
         IMPORTANT update file name and update campaign name below
         """
-        data = pd.read_csv(r'/Users/colterhill/Documents/ROI Reports/Call Logs/Jul 2024/%s' % uploaded_file_name)
+        data = pd.read_csv(r'/Users/colterhill/Documents/ROI Reports/Call Logs/Sep 2024/%s' % uploaded_file_name)
 
         df = pd.DataFrame(data)
 
@@ -62,11 +62,15 @@ class Command(BaseCommand):
         row_count = 0
         for row in df.itertuples():
             row_count += 1
+            # print(row)
 
             # if row_count > 10:
             #     break
 
             call_date = row._8
+            call_keyword = row.Keywords
+            number_name = row._5
+            call_source = row.Source
             customer_phone = clean_phone(row._11)
             sf_account_id = ''
             if customer_phone not in numbers_checked_list:
@@ -74,20 +78,28 @@ class Command(BaseCommand):
 
                 # Try phone clean
                 if customer_phone:
-                    sf_account_list_raw = salesforce.query_all("SELECT Id FROM Account WHERE is_150_account_base_text__c = 'NO' AND (phone_clean__c = %r OR mobile_clean__c = %r)" % (customer_phone, customer_phone))
+                    sf_account_list_raw = salesforce.query_all("SELECT Id, Name FROM Account WHERE (phone_clean__c = %r OR mobile_clean__c = %r)" % (customer_phone, customer_phone))
                     sf_account_list = sf_account_list_raw['records']
                     if sf_account_list:
                         sf_account_id = sf_account_list[0]['Id']
+                        sf_account_name = sf_account_list[0]['Name']
             if sf_account_id:
                 # print here to check before making objects
-        #         print(f"ID: {sf_account_id} Call Date: {call_date} Phone#: {customer_phone}")
+        #         print(f"ID: {sf_account_id} Name: {sf_account_name} Call Date: {call_date} Phone#: {customer_phone} Source: {call_source} Number Name: {number_name} Keyword: {call_keyword}")
+        #         # if row_count > 10:
+        #         #     break
         # print(row_count)
 
                 marketing_tracker, is_new = MarketingTracker.objects.get_or_create(salesforce_account_id=sf_account_id)
                 
                 if is_new:
                     marketing_tracker.campaign_code = campaign_code
-                    marketing_tracker.save(update_fields=['campaign_code', 'phone_source'])
+                    marketing_tracker.account_name = sf_account_name
+                    marketing_tracker.call_date = call_date
+                    marketing_tracker.keyword = call_keyword
+                    marketing_tracker.number_called_name = number_name
+                    marketing_tracker.phone_source = call_source
+                    marketing_tracker.save(update_fields=['campaign_code', 'account_name', 'call_date', 'keyword', 'number_called_name', 'phone_source'])
                     
                     sf_account_dict = {'Id': str(sf_account_id), 'marketing_campaign__c': campaign_code}
                     update_sf_account_list.append(sf_account_dict)

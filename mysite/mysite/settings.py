@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'corsheaders',
+    'rest_framework',
     'myprojects',
     'payment_processing',
     'users',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -83,6 +86,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# settings.py
+EMAIL_BACKEND = 'myprojects.email_backends.CustomEmailBackend'
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'chill@rmfp.com'         # Your admin account
+EMAIL_HOST_PASSWORD = 'Lumber1$'      # Your admin account's password
+DEFAULT_FROM_EMAIL = 'chill@rmfp.com'        # Default fallback if needed
 
 
 # Password validation
@@ -125,3 +138,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+QUICKBOOKS_CLIENT_ID = 'ABKBxl9rKO3zJmrTiYeIpz0WQYDpUrSVfffuZyPayWmirFDe3c'
+QUICKBOOKS_CLIENT_SECRET = '1GFIAZ9dcstsn09oNCyjz6zPoa0fwyPIv1onZERU'
+QUICKBOOKS_ENVIRONMENT = 'production'
+QUICKBOOKS_REDIRECT_URI = 'http://localhost:8000/callback/'

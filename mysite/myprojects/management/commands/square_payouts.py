@@ -5,16 +5,16 @@ from square.client import Client
 sandbox_token = 'EAAAl51Ah6ogt8nrKM0C-ldw4f_fERzC91gkQXqx82xv5et97YDjuP73ECG_xayH'
 production_token = 'EAAAl-HYUYo9dYxZZoqW_3CsrUAu8tQSJ5RB6BI5zwpfOtKACwQ7wqwgbstBU0N7'
 
+# payouts_api = Client(
+#     bearer_auth_credentials=BearerAuthCredentials(
+#         access_token=sandbox_token
+#     ),
+#     environment='sandbox').payouts
 payouts_api = Client(
     bearer_auth_credentials=BearerAuthCredentials(
-        access_token=sandbox_token
+        access_token=production_token
     ),
-    environment='sandbox').payouts
-# client = Client(
-#     bearer_auth_credentials=BearerAuthCredentials(
-#         access_token=production_token
-#     ),
-#     environment='production')
+    environment='production').payouts
 
 
 
