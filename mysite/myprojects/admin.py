@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MarketingTracker, SmsTracker, PhoneCalls, EnneagramCode, EnneagramTest
+from .models import MarketingTracker, SmsTracker, PhoneCalls, EnneagramCode, EnneagramTest, JournalEntry, CallRailCall
 
 # Register your models here.
 class MarketingTrackerAdmin(admin.ModelAdmin):
@@ -21,3 +21,16 @@ admin.site.register(EnneagramTest, EnneagramTestAdmin)
 class EnneagramCodeAdmin(admin.ModelAdmin):
     list_display = ['expiration', 'status', 'code']
 admin.site.register(EnneagramCode, EnneagramCodeAdmin)
+
+
+class JournalEntryAdmin(admin.ModelAdmin):
+    list_display = ['journal_id', 'date', 'reference', 'posted_to_qbo', 'posted_at']
+    list_filter = ['posted_to_qbo']
+    search_fields = ['journal_id', 'reference']
+
+admin.site.register(JournalEntry, JournalEntryAdmin)
+
+class CallRailCallAdmin(admin.ModelAdmin):
+    list_display = ('id', 'number_name', 'phone_number', 'call_date_time', 'call_source', 'call_campaign', 'duration')
+    list_filter = ('call_source', 'number_name', 'call_campaign')
+admin.site.register(CallRailCall, CallRailCallAdmin)

@@ -33,6 +33,9 @@ class Command(BaseCommand):
         row_count = 0
         tax_total = 0
         for quote in sf_quote_list:
+            row_count += 1
+            if row_count > 3:
+                break
             sf_id = quote['Id']
             quote_number = quote['QuoteNumber']
             sf_division = quote['division__c']
@@ -161,26 +164,17 @@ class Command(BaseCommand):
                 "currencyCode": "USD",
                 }
 
-            url = "https://rest.avatax.com/api/v2/transactions/create"
-
+            # url = "https://rest.avatax.com/api/v2/transactions/create"
+            #
             payload = json.dumps(quote_data)
+            #
+            # headers = {
+            #     'X-Avalara-Client': 'DjangoTaxApp; 1.0; Production; Self',
+            #     'Authorization': f'Basic {auth_base64}',
+            #     'Content-Type': 'application/json'
+            # }
+            #
+            # response = requests.request("POST", url, headers=headers, data=payload, allow_redirects=False)
 
-            headers = {
-                'X-Avalara-Client': 'DjangoTaxApp; 1.0; Production; Self',
-                'Authorization': f'Basic {auth_base64}',
-                'Content-Type': 'application/json'
-            }
+            print(payload)
 
-            response = requests.request("POST", url, headers=headers, data=payload, allow_redirects=False)
-
-            print(response.text)
-        #
-            row_count += 1
-            # print(bistrack_stage_date)
-            # if row_count > 10:
-            #     break
-        #     # print(sf_id)
-        #     # print(sf_division)
-        #     # print(quote_data)
-        # print(row_count)
-        #

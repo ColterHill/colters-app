@@ -1,3 +1,65 @@
-{'BillAddr':
-  {'Id': '177', 'Line1': 'Sheridan Police Dept.', 'City': 'Denver', 'Country': 'USA', 'CountrySubDivisionCode': 'CO', 'PostalCode': '80201'},
-  'Balance': 0, 'Vendor1099': False, 'CurrencyRef': {'value': 'USD', 'name': 'United States Dollar'}, 'domain': 'QBO', 'sparse': False, 'Id': '195', 'SyncToken': '0', 'MetaData': {'CreateTime': '2025-01-31T11:33:19-08:00', 'LastUpdatedTime': '2025-01-31T11:33:19-08:00'}, 'GivenName': 'City', 'MiddleName': 'Of', 'FamilyName': 'Sheridan', 'CompanyName': 'City Of Sheridan', 'DisplayName': 'City Of Sheridan', 'PrintOnCheckName': 'City Of Sheridan', 'Active': True, 'V4IDPseudonym': '002059bc087f70fee541feaa04c0482fa87119'}
+{
+  "lines": [
+    {
+      "number": "02033171",
+      "quantity": 48.0,
+      "amount": 780.0,
+      "taxCode": "P0000000",
+      "itemCode": "SO",
+      "description": "*SO* 2x6 x 8 No Reveal Log Siding Hand Hewn  SPF"
+    },
+    {
+      "number": "02033172",
+      "quantity": 6.0,
+      "amount": 121.86,
+      "taxCode": "P0000000",
+      "itemCode": "SO",
+      "description": "*SO* 2x6 x 10 No Revea Log Siding Hand Hewn  SPF"
+    },
+    {
+      "number": "02033173",
+      "quantity": 24.0,
+      "amount": 682.32,
+      "taxCode": "P0000000",
+      "itemCode": "SO",
+      "description": "*SO* 2x6 x 14 No Reveal Log Siding Hand Hewn SPF"
+    },
+    {
+      "number": "02211374",
+      "quantity": 1.0,
+      "amount": 130.0,
+      "taxCode": "NT",
+      "itemCode": "DC",
+      "description": "# DELIVERY"
+    }
+  ],
+  "type": "SalesInvoice",
+  "companyCode": 157753,
+  "date": "2025-02-18",
+  "customerCode": "0011A00001Urlq4QAB",
+  "docCode": "00535012",
+  "exemptionNo": "",
+  "totalAmount": 1844.08,
+  "totalTax": 129.9,
+  "addresses": {
+    "shipFrom": {
+      "line1": "10605 Charter Oak Ranch Rd",
+      "city": "Fountain",
+      "region": "CO",
+      "country": "US",
+      "postalCode": "80817"
+    },
+    "shipTo": {
+      "line1": "3085 Fuller Rd",
+      "city": "Colorado Springs",
+      "region": "CO",
+      "country": "US",
+      "postalCode": "80920"
+    }
+  },
+  "commit": true,
+  "currencyCode": "USD"
+}
+ID: 0Q0Um0000093X77KAE, Quote Number: 00548183, Close Date: 2025-01-16, Customer ID: 001Um00000Ix8wtIAB, Total: 3518.5, Tax: 150.34, Is Delivery: YES, Address: 855 Pheasant Loop, Westcliffe, CO, 81252, US
+{"lines": [{"number": "02203637", "quantity": 4512.0, "amount": 3068.16, "taxCode": "P0000000", "itemCode": "SO", "description": "*SO* 1x4 Blue Stain Pine Shiplap Nickel Gap-1/8\""}, {"number": "02203638", "quantity": 1.0, "amount": 300.0, "taxCode": "NT", "itemCode": "DC", "description": "# DELIVERY"}], "type": "SalesInvoice", "companyCode": 157753, "date": "2025-02-18", "customerCode": "001Um00000Ix8wtIAB", "docCode": "00548183", "exemptionNo": "", "totalAmount": 3518.5, "totalTax": 150.34, "addresses": {"shipFrom": {"line1": "10605 Charter Oak Ranch Rd", "city": "Fountain", "region": "CO", "country": "US", "postalCode": "80817"}, "shipTo": {"line1": "855 Pheasant Loop", "city": "Westcliffe", "region": "CO", "country": "US", "postalCode": "81252"}}, "commit": true, "currencyCode": "USD"
+}

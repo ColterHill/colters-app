@@ -126,3 +126,52 @@ class EnneagramCode(models.Model):
 
     def __str__(self):
         return "%s - %s" % (self.code, self.status)
+
+
+class QuickBooksToken(models.Model):
+    company_id = models.CharField(max_length=50, unique=True)
+    access_token = models.TextField()
+    refresh_token = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"QBO Token for Company ID {self.company_id}"
+
+
+class JournalEntry(models.Model):
+    journal_id = models.CharField(max_length=20, unique=True)
+    date = models.DateField()
+    reference = models.TextField(blank=True, null=True)
+    posted_to_qbo = models.BooleanField(default=False)
+    qbo_response = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    posted_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"JournalEntry {self.journal_id} ({'Posted' if self.posted_to_qbo else 'Pending'})"
+
+
+class CallRailCall(models.Model):
+    number_name = models.CharField(max_length=255, blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    call_date_time = models.DateTimeField()
+    duration = models.IntegerField(default=0)
+    call_source = models.CharField(max_length=255, blank=True, null=True)
+    call_keywords = models.TextField(blank=True, null=True)
+    call_referrer = models.TextField(blank=True, null=True)
+    call_medium = models.CharField(max_length=255, blank=True, null=True)
+    call_landing_page = models.TextField(blank=True, null=True)
+    call_campaign = models.CharField(max_length=255, blank=True, null=True)
+    call_utm_content = models.CharField(max_length=255, blank=True, null=True)
+    call_recording = models.URLField(blank=True, null=True)
+    call_transcription = models.TextField(blank=True, null=True)
+    call_agent_speaker_percent = models.FloatField(default=0.0)
+    call_customer_speaker_percent = models.FloatField(default=0.0)
+    call_sentiment = models.CharField(max_length=50, blank=True, null=True)
+    prior_calls = models.IntegerField(default=0)
+    gclid = models.CharField(max_length=255, blank=True, null=True)
+    call_summary = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.phone_number} - {self.call_date_time}"

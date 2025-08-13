@@ -1,0 +1,113 @@
+InvoiceDate,BranchID,CustomerID,InvoiceLineID,InvoiceID,Description,ProductID,Quantity,UnitAmount,TotalAmount,TotalTax,DeliveryAddressLine1,DeliveryCity,DeliveryCounty,DeliveryPostCode
+4/1/25 0:00,2,14964,304904,112609,*SO* 1x6  Nickel Gap T&G CVG -Hemlock-,41383,4150,4.05,16807.5,1344.6,16196 6740 Rd,Grand Junction,,0
+4/1/25 0:00,2,102267,304922,112616,10' Rail - Cedar Split Rail,53,12,20.49,245.88,19.67,"Will Call Pick Up @ 5075 Tabor St Wheatridge,Co",,,
+4/1/25 0:00,2,102267,304923,112616,2 Rail Corner Post - Cedar Split Rail,49,2,20.75,41.5,3.32,"Will Call Pick Up @ 5075 Tabor St Wheatridge,Co",,,
+4/1/25 0:00,2,102267,304924,112616,2 Rail End Post - Cedar Split Rail,47,2,18.99,37.98,3.04,"Will Call Pick Up @ 5075 Tabor St Wheatridge,Co",,,
+4/1/25 0:00,2,102267,304925,112616,2 Rail Line Post - Cedar Split Rail,48,3,21.67,65.01,5.2,"Will Call Pick Up @ 5075 Tabor St Wheatridge,Co",,,
+4/2/25 0:00,2,25553,305126,112706,1x10x10 S1S2E Cedar KD,989,6,34.0,204.0,16.32,Will Call,,,
+4/2/25 0:00,2,25553,305127,112706,1x12x14 S1S2E Cedar KD,997,8,63.0,504.0,40.32,Will Call,,,
+4/2/25 0:00,3,60298,305174,112714,"1x4x6 5/8"" Premium El Dorado (SP)",754,72,2.59,186.48,14.04,1164 County Rd 110,Florence,CO,0
+4/2/25 0:00,3,60298,305175,112714,"1x6x6 3/4"" STD WRC S1S2E - SALE PRICE NO RETURNS",770,35,3.59,125.65,9.46,1164 County Rd 110,Florence,CO,0
+4/2/25 0:00,3,60298,305176,112714,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,6,8.99,53.94,4.07,1164 County Rd 110,Florence,CO,0
+4/3/25 0:00,2,27516,305633,112868,*SO* 6x8x14' RS #1 &btr FOHC Doug fir-,42058,1,175.0,175.0,14.0,Will Call,,,
+4/3/25 0:00,2,27516,305634,112868,*SO* 6x6x10' RS #1 &btr FOHC Doug fir-,42059,2,95.0,190.0,15.2,Will Call,,,
+4/3/25 0:00,2,27516,305640,112870,"*SO* 7-1/8"" CV Cedar shakes PNL Stag butt with Key Way-",42168,35,64.25,2248.75,179.9,Will Call Request,,,
+4/3/25 0:00,2,40611,305646,112874,1x6x16 RS / Smooth Pine T&G KD - Reversible,1010,40,19.04,761.6,60.93,2944 Routt Circle,Lakewood,,0
+4/4/25 0:00,2,53600,305959,112952,2x2x8 Con Common Redwood,784,20,5.92,118.4,9.47,4641 South Jason,Englewood,,0
+4/4/25 0:00,2,53600,305960,112952,"2-7/8"" FlatLOK (50ct)",228,1,32.85,32.85,2.63,4641 South Jason,Englewood,,0
+4/4/25 0:00,3,56910,305970,112958,"4x4x8 RS SP Prem (SP 3.5"")",44,40,22.99,919.6,69.25,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/4/25 0:00,3,56910,305971,112958,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,115,7.99,918.85,69.19,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/4/25 0:00,3,56910,305972,112958,"1x6x6 5/8"" Premium El Dorado (SP)",764,550,3.29,1809.5,136.26,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/4/25 0:00,3,56910,305973,112958,"8"" Maxima T-Hinge Black",303,1,17.04,17.04,1.28,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/4/25 0:00,3,56910,305974,112958,Post Latch,305,1,16.51,16.51,1.24,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/4/25 0:00,3,56910,305975,112958,Concrete 80 lb. Bag,302,24,8.89,213.36,16.06,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/7/25 0:00,2,101851,306234,113072,*SO* 1x6x14' S4S Doug fir #3&btr-,42606,50,15.75,787.5,63.0,Will Call,,,
+4/7/25 0:00,2,101851,306236,113072,DEl - Delivery,24,1,0.0,176.0,0.0,Will Call,,,
+4/7/25 0:00,2,21229,306400,113132,2x8x16 #2 Prime SYP MCA Treater Series Superior KDAT,897,6,36.2,217.2,17.38,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306401,113132,2x8x10 #2 Prime SYP MCA Treater Series Superior KDAT,894,28,22.73,636.44,50.92,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306402,113132,2x8x12 #2 Prime SYP MCA Treater Series Superior KDAT,895,1,27.0,27.0,2.16,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306403,113132,4x4x8 #2&BTR HF CAC Treated,27,2,19.72,39.44,3.16,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306404,113132,5/4x6x16 Trex Enhance Naturals Rocky Harbor Grooved,1144,23,46.24,1063.52,85.08,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306405,113132,5/4x6x12 Trex Enhance Naturals Rocky Harbor Grooved,1142,17,34.68,589.56,47.16,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306406,113132,1x12x12 Trex Enhance Naturals Rocky Harbor Fascia,1140,7,116.28,813.96,65.12,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306407,113132,5/4x6x20 Trex Enhance Naturals Rocky Harbor Solid,1147,1,57.8,57.8,4.62,WILL CALL PICK UP @ 44th,,,
+4/7/25 0:00,2,21229,306408,113132,2 1/2'' TrapEase- Rocky Harbor/Biscayne (350pc Box) Screw,32214,2,51.99,103.98,8.31,WILL CALL PICK UP @ 44th,,,
+4/8/25 0:00,3,65341,306742,113234,"1x6x6 3/4"" Premium DE (PREM IMPORT)",763,456,3.49,1591.44,119.84,"1131 Valley View Dr  Canon City, Colorado 81212",,,0
+4/8/25 0:00,3,65341,306743,113234,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,168,8.99,1510.32,113.72,"1131 Valley View Dr  Canon City, Colorado 81212",,,0
+4/9/25 0:00,3,56910,307176,113368,"4x4x8 RS SP Prem (SP 3.5"")",44,22,22.99,505.78,38.09,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/9/25 0:00,3,56910,307177,113368,Concrete 80 lb. Bag,302,18,8.89,160.02,12.04,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/9/25 0:00,3,56910,307178,113369,"4x4x8 RS SP Prem (SP 3.5"")",44,22,22.99,505.78,38.09,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/9/25 0:00,3,56910,307179,113369,Concrete 80 lb. Bag,302,18,8.89,160.02,12.04,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/9/25 0:00,3,56910,307180,113370,"4x4x8 RS SP Prem (SP 3.5"")",44,22,22.99,505.78,38.09,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/9/25 0:00,3,56910,307181,113370,Concrete 80 lb. Bag,302,18,8.89,160.02,12.04,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/10/25 0:00,3,22986,307276,113410,5/4x6x12 Fiberon Good Life - Grooved - Cottage,1079,4,31.08,124.32,9.36,719-495-8885,,,0
+4/10/25 0:00,3,22986,307277,113410,2 1/2'' TrapEase- Gray (11 Lbs / Bucket) Screw,1179,1,11.77,11.77,0.89,719-495-8885,,,0
+4/10/25 0:00,3,22986,307278,113410,Fiberon  Phantom Universal Fasteners - (50 Sq Ft),316,1,41.71,41.71,3.14,719-495-8885,,,0
+4/10/25 0:00,2,102336,307568,113527,"1x6x6 3/4"" Premium DE (PREM IMPORT)",763,48,3.59,172.32,13.79,Customer Pick Up,,,
+4/10/25 0:00,2,102336,307569,113527,2x6x8 RS Cedar,776,21,21.99,461.79,36.94,Customer Pick Up,,,
+4/10/25 0:00,2,102336,307570,113527,2x6x10 RS Cedar,777,1,27.99,27.99,2.24,Customer Pick Up,,,
+4/10/25 0:00,2,102336,307571,113527,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,14,9.99,139.86,11.19,Customer Pick Up,,,
+4/10/25 0:00,2,102336,307572,113527,2x4x10 RS Prem Cedar,775,5,15.99,79.95,6.39,Customer Pick Up,,,
+4/10/25 0:00,2,102336,307573,113527,1x6x10 Cedar T&G Rev STK KD,1014,7,18.9,132.3,0.0,Customer Pick Up,,,
+4/11/25 0:00,2,40611,307700,113569,1x6x16 RS / Smooth Pine T&G KD - Reversible,1010,24,19.04,456.96,36.56,2944 Routt Circle,Lakewood,,0
+4/11/25 0:00,3,40698,307812,113597,2x12x20 #1 SYP L3 Treated,889,1,72.13,72.13,5.43,6270 Colfax Ter,,,
+4/12/25 0:00,3,61506,307992,113669,*SO*  1x8x12 Fiberon Beach House Riser,42758,6,66.17,397.02,29.9,"7232 River Bend Rd Colorado Springs, Co 80911",,,0
+4/12/25 0:00,3,56910,307996,113671,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,75,7.99,599.25,45.12,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/12/25 0:00,3,56910,307997,113671,"1x6x6 5/8"" Premium El Dorado (SP)",764,360,3.19,1148.4,86.47,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/12/25 0:00,3,56910,307998,113671,"8"" Maxima T-Hinge Black",303,1,17.04,17.04,1.28,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/12/25 0:00,3,56910,307999,113671,Post Latch,305,1,16.51,16.51,1.25,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/12/25 0:00,2,69880,308115,113712,"34''x69.5"" Fortress Panel - Res - Black Sand - Level",369,1,120.47,120.47,9.64,12362 N Dumont Way,Littleton,,0
+4/12/25 0:00,2,69880,308116,113712,"34''x93.5"" Fortress Panel - Res - Black Sand - Level",335,2,149.64,299.28,23.94,12362 N Dumont Way,Littleton,,0
+4/12/25 0:00,2,69880,308117,113712,Fortress Nylon Gate Hinges and Latch Kit-Black,9131,5,92.34,461.7,36.94,12362 N Dumont Way,Littleton,,0
+4/12/25 0:00,2,69880,308118,113712,Fortress Touch Up Pens Black Sand,404,1,17.98,17.98,1.44,12362 N Dumont Way,Littleton,,0
+4/12/25 0:00,2,69880,308119,113712,"Fortress 34"" Gate Upright Kit-Black Sand",9130,5,96.86,484.3,38.74,12362 N Dumont Way,Littleton,,0
+4/12/25 0:00,2,99580,308122,113715,2x10x12 #2 Prime SYP MCA Treater Series Superior KDAT,902,10,33.45,334.5,26.76,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308123,113715,2x10x16 #2 Prime SYP MCA Treater Series Superior KDAT,906,6,44.57,267.42,21.39,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308124,113715,2x12x8 #2 Prime SYP MCA Treater Series Superior KDAT,910,2,31.23,62.46,5.0,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308125,113715,6x6x8 CAC Treated - Brown,917,2,39.34,78.68,6.29,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308126,113715,"5"" LedgerLOK Flat Head (12ct)",232,2,23.71,47.42,3.79,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308127,113715,ABW66RZ (POST BASE),188,6,46.65,279.9,22.39,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308128,113715,LUS210Z (JOIST HANGER),218,6,2.92,17.52,1.4,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308129,113715,MSTA18Z (STAIR STRAP TIE),221,4,1.98,7.92,0.63,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308130,113715,AC4Z (POST TO BEAM),189,6,6.41,38.46,3.08,Deck framing and decking only @ 2922 Dickens St,,,
+4/12/25 0:00,2,99580,308131,113715,Concrete 80 lb. Bag,302,20,8.66,173.2,13.87,Deck framing and decking only @ 2922 Dickens St,,,
+4/15/25 0:00,3,56910,308944,114007,"4x4x8 RS SP Prem (SP 3.5"")",44,25,24.99,624.75,47.04,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/15/25 0:00,3,56910,308945,114007,Concrete 80 lb. Bag,302,20,8.89,177.8,13.392,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/15/25 0:00,3,56910,308946,114008,"4x4x8 RS SP Prem (SP 3.5"")",44,26,24.99,649.74,48.93,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/15/25 0:00,3,56910,308947,114008,Concrete 80 lb. Bag,302,20,8.89,177.8,13.38,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/16/25 0:00,3,64212,309168,114077,7.5' Postmaster+ Steel Post,46,7,44.11,308.77,23.25,"13 Stover Ln  Manitou Springs, Colorado 80829",,,0
+4/17/25 0:00,2,69089,309655,114263,2x8x8 RS Cedar,779,2,27.99,55.98,4.48,6925 W Bayaud Ave,"Lakewood,",,0
+4/18/25 0:00,2,66250,309820,114321,1x12x12 Fiberon Symmetry - Fascia - Warm Sienna,95,1,134.28,134.28,10.74,Add to Craigmoor delivery,,,
+4/18/25 0:00,2,66250,309821,114321,5/4x6x20 Fiberon Symmetry - Solid - Warm Sienna,1112,5,93.0,465.0,37.2,Add to Craigmoor delivery,,,
+4/21/25 0:00,2,46998,310255,114452,"*SO* 3/8"" x 16""- 16' Vertical Lap Siding/Soffit (40503)-",43002,5,48.0,240.0,19.2,Will Call,,,
+4/22/25 0:00,2,102463,310631,114605,1x6x6 #3 Blue Stain Pine T&G KD,1029,56,5.4,302.4,24.19,WILL CALL PICK UP @   5075 Tabor St. Wheatridge,,,
+4/22/25 0:00,2,102463,310632,114605,*Please Wrap & Band WILL CALL PICK *,1251,1,0.0,0.0,0.0,WILL CALL PICK UP @   5075 Tabor St. Wheatridge,,,
+4/23/25 0:00,3,56910,310798,114653,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,70,7.99,559.3,42.12,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/23/25 0:00,3,56910,310799,114653,"1x6x6 5/8"" Premium El Dorado (SP)",764,300,3.19,957.0,72.06,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/23/25 0:00,3,56910,310800,114653,"8"" Maxima T-Hinge Black",303,1,17.04,17.04,1.28,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/23/25 0:00,3,56910,310801,114653,Post Latch,305,1,16.51,16.51,1.24,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/24/25 0:00,3,56910,311077,114758,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,70,7.99,559.3,42.12,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/24/25 0:00,3,56910,311078,114758,"1x6x6 5/8"" Premium El Dorado (SP)",764,320,3.19,1020.8,76.87,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/24/25 0:00,3,56910,311079,114758,"8"" Maxima T-Hinge Black",303,1,17.04,17.04,1.28,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/24/25 0:00,3,56910,311080,114758,Post Latch,305,1,16.51,16.51,1.24,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/25/25 0:00,2,66250,311420,114883,"*SO* Pro Plug 2-3/4""   WS (300/Plugs)-",43213,1,110.0,110.0,8.8,Add to Craigmoor delivery,,,
+4/25/25 0:00,3,56910,311494,114907,"4x4x8 RS SP Prem (SP 3.5"")",44,15,23.99,359.85,27.1,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/25/25 0:00,3,56910,311495,114907,Concrete 80 lb. Bag,302,10,8.89,88.9,6.69,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/25/25 0:00,3,22986,311516,114915,1x8x12 S1S2E Cedar,43439,1,36.42,36.42,2.74,719-495-8885,,,0
+4/28/25 0:00,3,56910,311861,115061,"1x6x6 5/8"" Premium El Dorado (SP)",764,280,3.19,893.2,67.26,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/28/25 0:00,3,56910,311862,115061,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,60,7.99,479.4,36.1,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/28/25 0:00,3,56910,311863,115061,"8"" Maxima T-Hinge Black",303,1,17.04,17.04,1.28,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/28/25 0:00,3,56910,311864,115061,Post Latch,305,1,16.51,16.51,1.24,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/29/25 0:00,3,56910,312284,115201,2x4x8 RS Std Cedar - SALE PRICE NO RETURNS,773,70,7.99,559.3,42.12,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/29/25 0:00,3,56910,312285,115201,"1x6x6 5/8"" Premium El Dorado (SP)",764,300,3.19,957.0,72.06,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/29/25 0:00,3,56910,312286,115201,"8"" Maxima T-Hinge Black",303,1,17.04,17.04,1.28,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/29/25 0:00,3,56910,312287,115201,Post Latch,305,1,16.51,16.51,1.24,"39550 Us Highway 24, Lake George, Co 80827",,,0
+4/29/25 0:00,2,15657,312294,115205,SPECIAL ORDER NON-RETURNABLE 2-3 DAY LEAD,1251,1,0.0,0.0,0.0,.,.,.,80205
+4/29/25 0:00,2,15657,312295,115205,SMOOTH - PRIMED,1251,1,0.0,0.0,0.0,.,.,.,80205
+4/29/25 0:00,2,15657,312296,115205,"*SO* 5/8x10-1/4""x12' Hardie Artisan Siding-Ship Lap Primed",40011,145,73.64,10677.8,940.71,.,.,.,80205
+4/29/25 0:00,2,15657,312297,115205,*SO* 4/4x3.5”x12’  Hardie - Primed Smooth Trim,40012,35,21.4,749.0,65.99,.,.,.,80205
+4/29/25 0:00,2,15657,312298,115205,*SO* 1/4x24”x8’ Hardie - Primed/Non-Vented,40013,5,30.05,150.25,13.24,.,.,.,80205
+4/29/25 0:00,2,15657,312299,115205,*SO* 4/4x7.25”x12’ Hardie - Primed Fascia,40014,15,44.32,664.8,58.57,.,.,.,80205
+4/29/25 0:00,2,15657,312300,115205,DISCOUNT APPROVED THROUGH 11/22 - CGS,1251,1,-400.0,-400.0,-35.24,.,.,.,80205
+4/29/25 0:00,2,15657,312301,115205,DC - Delivery Charge,10,1,0.0,0.0,0.0,.,.,.,80205
+4/29/25 0:00,3,59319,312340,115223,2x12x20 #1 SYP L3 Treated,889,5,72.13,360.65,27.16,"725 Riverview Lane Colorado Springs, Co 80916",,,0
