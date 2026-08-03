@@ -1,0 +1,51 @@
+# Environment and secrets
+.env
+.env.*
+*.pem
+keyInfo.txt
+user_data.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# Node / Vue
+node_modules/
+dist/
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs and local output
+*.log
+output/
+mysite/ringcentral_recordings/
+
+# Data artifacts (generated CSVs, exports)
+*.csv
+!**/fixtures/**/*.csv
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Local vendored packages (use requirements.txt + venv instead)
+lib/

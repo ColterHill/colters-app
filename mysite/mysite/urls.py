@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from myprojects.views import MarketingTrackerViewSet
+from myprojects.views import MarketingTrackerViewSet, ringcentral_recording_proxy
 
 router = DefaultRouter()
 router.register(r'MarketingTracker', MarketingTrackerViewSet)
@@ -25,4 +25,6 @@ router.register(r'MarketingTracker', MarketingTrackerViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/', include('po_processing.urls')),
+    path('ringcentral/recording/<str:recording_id>/', ringcentral_recording_proxy, name='ringcentral_recording'),
 ]

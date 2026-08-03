@@ -1,0 +1,580 @@
+Absolutely! Let me tailor the implementation for your single-app Django project structure. This will be much simpler since everything goes into your existing `inventory` app.
+
+# 🎯 AirParser Integration for Single-App Django Project
+
+## 📋 Project Structure (Your Setup)
+```
+inventory/
+├── models.py          # Add new models here
+├── api.py            # Add views/serializers here (instead of separate files)
+├── utils.py          # Add AirParser config here
+├── admin.py          # Add admin interfaces here
+├── urls.py           # Add new URLs here
+└── management/       # Optional: management commands
+```
+
+---
+
+## 🗄️ 1. Database Models (Add to `inventory/models.py`)
+
+### **Add these models to your existing models.py:**
+
+```python
+# Add these imports at the top if not already present
+import uuid
+from django.contrib.auth.models import User
+
+class Vendor(models.Model):
+    """Model to store vendor information and their AirParser API configuration"""
+    id = models.CharField(max_length=50, primary_key=True)  # e.g., 'acme_corp'
+    name = models.CharField(max_length=200)  # e.g., 'ACME Corporation'
+    airparser_inbox_id = models.CharField(max_length=100, blank=True, null=True, help_text="AirParser inbox ID (e.g., 68bf19bf8fb7546120660a49)")
+    active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+
+
+class POConfirmUpload(models.Model):
+    """Model to track purchase order uploads and their processing status"""
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pending Upload'),
+        ('uploading', 'Uploading to AirParser'),
+        ('processing', 'Processing by AirParser'),
+        ('completed', 'Successfully Processed'),
+        ('failed', 'Processing Failed'),
+        ('error', 'Upload Error'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='uploads')
+    uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    # File information
+    original_filename = models.CharField(max_length=255)
+    file_size = models.PositiveIntegerField()  # Size in bytes
+    file_hash = models.CharField(max_length=64, blank=True, null=True)  # SHA-256 hash for deduplication
+    
+    # Processing status and results
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    airparser_job_id = models.CharField(max_length=100, blank=True, null=True)
+    airparser_response = models.JSONField(blank=True, null=True)
+    error_message = models.TextField(blank=True, null=True)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    processed_at = models.DateTimeField(null=True, blank=True)
+    
+    # Extracted data (populated after successful processing)
+    extracted_data = models.JSONField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.vendor.name} - {self.original_filename} ({self.status})"
+
+    class Meta:
+        ordering = ['-created_at']
+```
+
+---
+
+## ⚙️ 2. AirParser Configuration (Add to `inventory/utils.py`)
+
+### **Add this to your existing utils.py:**
+
+```python
+"""
+AirParser configuration and utility functions for PO processing
+"""
+
+# AirParser API Configuration
+AIRPARSER_CONFIG = {
+    'api_key': 'YOUR_API_KEY_HERE',  # Replace with your actual AirParser API key
+    'api_url': 'https://api.airparser.com',
+    'timeout': 30,  # Request timeout in seconds
+    'max_file_size': 20 * 1024 * 1024,  # 20MB as per AirParser docs
+}
+
+
+def get_airparser_config():
+    """Get AirParser configuration"""
+    return AIRPARSER_CONFIG.copy()
+
+
+def is_airparser_configured():
+    """Check if AirParser is properly configured"""
+    return (
+        AIRPARSER_CONFIG['api_key'] and 
+        AIRPARSER_CONFIG['api_key'] != 'YOUR_API_KEY_HERE'
+    )
+
+
+def get_airparser_upload_url(inbox_id):
+    """Get the AirParser upload URL for a specific inbox"""
+    base_url = AIRPARSER_CONFIG['api_url'].rstrip('/')
+    return f"{base_url}/inboxes/{inbox_id}/upload"
+
+
+def get_airparser_headers():
+    """Get the required headers for AirParser API requests"""
+    return {
+        'X-API-Key': AIRPARSER_CONFIG['api_key']
+    }
+
+
+def validate_airparser_setup():
+    """Validate AirParser configuration"""
+    if not is_airparser_configured():
+        return False, "AirParser API key not configured in inventory/utils.py"
+    
+    if not AIRPARSER_CONFIG['api_url']:
+        return False, "AirParser API URL not configured"
+    
+    return True, None
+```
+
+---
+
+## 🔌 3. API Views and Serializers (Add to `inventory/api.py`)
+
+### **Add these imports at the top of your api.py:**
+
+```python
+# Add these imports to your existing api.py imports
+import os
+import hashlib
+import requests
+import json
+import logging
+from datetime import datetime
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.views import View
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework import status
+
+# Import your new models
+from .models import Supplier, POConfirmUpload
+from .utils import (
+    get_airparser_config, 
+    get_airparser_upload_url, 
+    get_airparser_headers, 
+    validate_airparser_setup
+)
+
+logger = logging.getLogger(__name__)
+```
+
+### **Add these views to your api.py:**
+
+```python
+class POConfirmUploadView(View):
+    """Handle purchase order file uploads"""
+    
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+    
+    def post(self, request):
+        try:
+            # Validate request
+            if 'file' not in request.FILES:
+                return JsonResponse({'error': 'No file provided'}, status=400)
+            
+            if 'supplier_id' not in request.POST:
+                return JsonResponse({'error': 'No supplier specified'}, status=400)
+            
+            file = request.FILES['file']
+            supplier_id = request.POST['supplier_id']
+            
+            # Validate file type
+            if not file.name.lower().endswith('.pdf'):
+                return JsonResponse({'error': 'Only PDF files are allowed'}, status=400)
+            
+            # Validate file size (10MB limit)
+            max_size = 10 * 1024 * 1024  # 10MB
+            if file.size > max_size:
+                return JsonResponse({'error': 'File size exceeds 10MB limit'}, status=400)
+            
+            # Validate supplier exists and has AirParser inbox ID configured
+            try:
+                vendor = Vendor.objects.get(id=supplier_id, active=True)
+                if not vendor.airparser_inbox_id:
+                    return JsonResponse({'error': f'AirParser inbox ID not configured for {vendor.name}'}, status=400)
+            except Vendor.DoesNotExist:
+                return JsonResponse({'error': 'Invalid vendor selected'}, status=400)
+            
+            # Calculate file hash for deduplication
+            file_content = file.read()
+            file_hash = hashlib.sha256(file_content).hexdigest()
+            file.seek(0)  # Reset file pointer
+            
+            # Check for duplicate uploads
+            existing_upload = POConfirmUpload.objects.filter(
+                vendor=vendor,
+                file_hash=file_hash,
+                status__in=['completed', 'processing']
+            ).first()
+            
+            if existing_upload:
+                return JsonResponse({
+                    'error': 'This file has already been uploaded and processed',
+                    'existing_upload_id': str(existing_upload.id)
+                }, status=409)
+            
+            # Create upload record
+            upload = POConfirmUpload.objects.create(
+                vendor=vendor,
+                uploaded_by=request.user if request.user.is_authenticated else None,
+                original_filename=file.name,
+                file_size=file.size,
+                file_hash=file_hash,
+                status='uploading'
+            )
+            
+            try:
+                # Send to AirParser via API
+                api_result = self.send_to_airparser_api(file_content, file.name, vendor, upload)
+                
+                if api_result['success']:
+                    upload.status = 'processing'
+                    upload.processed_at = datetime.now()
+                    upload.airparser_job_id = api_result.get('document_id')
+                    upload.airparser_response = api_result.get('response')
+                    upload.save()
+                    
+                    return JsonResponse({
+                        'success': True,
+                        'upload_id': str(upload.id),
+                        'document_id': api_result.get('document_id'),
+                        'message': f'File successfully uploaded to AirParser for {vendor.name}',
+                        'inbox_id': vendor.airparser_inbox_id
+                    })
+                else:
+                    upload.status = 'failed'
+                    upload.error_message = api_result.get('error', 'Unknown error')
+                    upload.save()
+                    
+                    return JsonResponse({
+                        'error': f'AirParser API error: {upload.error_message}'
+                    }, status=500)
+                    
+            except Exception as e:
+                upload.status = 'error'
+                upload.error_message = str(e)
+                upload.save()
+                logger.error(f"Error processing upload {upload.id}: {str(e)}")
+                raise
+                
+        except Exception as e:
+            logger.error(f"Error in POConfirmUploadView: {str(e)}")
+            return JsonResponse({'error': 'Internal server error'}, status=500)
+    
+    def send_to_airparser_api(self, file_content, filename, vendor, upload):
+        """Send file to AirParser via API following the official documentation"""
+        try:
+            # Validate AirParser configuration
+            is_valid, error_msg = validate_airparser_setup()
+            if not is_valid:
+                return {'success': False, 'error': error_msg}
+            
+            # Get configuration and prepare URL
+            config = get_airparser_config()
+            url = get_airparser_upload_url(vendor.airparser_inbox_id)
+            headers = get_airparser_headers()
+            
+            # Prepare metadata payload (optional)
+            meta_data = {
+                'vendor_id': vendor.id,
+                'vendor_name': vendor.name,
+                'upload_id': str(upload.id),
+                'original_filename': filename,
+                'upload_time': upload.created_at.isoformat(),
+            }
+            
+            # Prepare files and data for multipart form upload
+            files = {'file': (filename, file_content, 'application/pdf')}
+            data = {'meta': json.dumps(meta_data)}
+            
+            # Make the API request
+            response = requests.post(
+                url, files=files, data=data, headers=headers, timeout=config['timeout']
+            )
+            
+            if response.status_code in [200, 201]:
+                try:
+                    result_data = response.json()
+                    document_id = result_data if isinstance(result_data, str) else result_data.get('document_id')
+                except json.JSONDecodeError:
+                    document_id = response.text.strip()
+                
+                logger.info(f"Successfully uploaded PDF to AirParser inbox {vendor.airparser_inbox_id} for upload {upload.id}. Document ID: {document_id}")
+                
+                return {
+                    'success': True,
+                    'document_id': document_id,
+                    'response': result_data if 'result_data' in locals() else {'document_id': document_id},
+                    'inbox_id': vendor.airparser_inbox_id
+                }
+            else:
+                error_msg = f"HTTP {response.status_code}"
+                try:
+                    error_data = response.json()
+                    logger.error(f"AirParser API error response for upload {upload.id}: {error_data}")
+                    error_msg = error_data.get('error', error_data.get('message', error_data.get('statusCode', error_msg)))
+                except:
+                    error_msg = response.text or error_msg
+                    logger.error(f"AirParser API non-JSON error for upload {upload.id}: {error_msg}")
+                
+                return {'success': False, 'error': f"Status {response.status_code}: {error_msg}"}
+                
+        except requests.exceptions.Timeout:
+            return {'success': False, 'error': 'AirParser API request timed out'}
+        except requests.exceptions.RequestException as e:
+            return {'success': False, 'error': f'Network error: {str(e)}'}
+        except Exception as e:
+            return {'success': False, 'error': f'Unexpected error: {str(e)}'}
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_suppliers(request):
+    """Get list of active suppliers"""
+    try:
+        vendors = Vendor.objects.filter(active=True).values('id', 'name')
+        return Response({'vendors': list(vendors)})
+    except Exception as e:
+        logger.error(f"Error getting vendors: {str(e)}")
+        return Response({'error': 'Internal server error'}, status=500)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_upload_status(request, upload_id):
+    """Get status of a specific upload"""
+    try:
+        upload = POConfirmUpload.objects.get(id=upload_id)
+        return Response({
+            'upload_id': str(upload.id),
+            'status': upload.status,
+            'vendor': upload.vendor.name,
+            'filename': upload.original_filename,
+            'created_at': upload.created_at,
+            'processed_at': upload.processed_at,
+            'error_message': upload.error_message,
+            'extracted_data': upload.extracted_data
+        })
+    except POConfirmUpload.DoesNotExist:
+        return Response({'error': 'Upload not found'}, status=404)
+    except Exception as e:
+        logger.error(f"Error getting upload status: {str(e)}")
+        return Response({'error': 'Internal server error'}, status=500)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_upload_history(request):
+    """Get recent upload history"""
+    try:
+        uploads = POConfirmUpload.objects.select_related('vendor').order_by('-created_at')[:50]
+        
+        upload_data = []
+        for upload in uploads:
+            upload_data.append({
+                'id': str(upload.id),
+                'vendor_name': upload.vendor.name,
+                'filename': upload.original_filename,
+                'status': upload.status,
+                'created_at': upload.created_at,
+                'processed_at': upload.processed_at,
+                'file_size': upload.file_size
+            })
+        
+        return Response({'uploads': upload_data})
+    except Exception as e:
+        logger.error(f"Error getting upload history: {str(e)}")
+        return Response({'error': 'Internal server error'}, status=500)
+```
+
+---
+
+## 🔗 4. URL Configuration (Add to `inventory/urls.py`)
+
+### **Add these URLs to your existing urlpatterns:**
+
+```python
+# Add these to your existing urlpatterns list
+from .api import POConfirmUploadView, get_suppliers, get_upload_status, get_upload_history
+
+urlpatterns = [
+    # ... your existing URLs ...
+    
+    # PO Processing URLs
+    path('api/upload-po/', POConfirmUploadView.as_view(), name='upload_po'),
+    path('api/suppliers/', get_suppliers, name='get_suppliers'),
+    path('api/upload-status/<uuid:upload_id>/', get_upload_status, name='get_upload_status'),
+    path('api/upload-history/', get_upload_history, name='get_upload_history'),
+]
+```
+
+---
+
+## 🛠️ 5. Admin Interface (Add to `inventory/admin.py`)
+
+### **Add this to your existing admin.py:**
+
+```python
+# Add these imports
+from django.utils.html import format_html
+from django.urls import reverse
+import json
+
+# Add these admin classes
+@admin.register(Vendor)
+class SupplierAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'active', 'airparser_inbox_id', 'upload_count', 'created_at']
+    list_filter = ['active', 'created_at']
+    search_fields = ['id', 'name', 'contact_email', 'airparser_inbox_id']
+    list_editable = ['active']
+    readonly_fields = ['created_at', 'updated_at']
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('id', 'name', 'active')
+        }),
+        ('AirParser Configuration', {
+            'fields': ('airparser_inbox_id',),
+            'description': 'Each supplier needs their own AirParser inbox ID for document processing via API'
+        }),
+        ('Contact Information', {
+            'fields': ('contact_email', 'notes'),
+            'classes': ('collapse',)
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        })
+    )
+    
+    def upload_count(self, obj):
+        count = obj.uploads.count()
+        if count > 0:
+            url = reverse('admin:inventory_poconfirmupload_changelist') + f'?vendor__id__exact={obj.id}'
+            return format_html('<a href="{}">{} uploads</a>', url, count)
+        return '0 uploads'
+    upload_count.short_description = 'Uploads'
+
+
+@admin.register(POConfirmUpload)
+class POConfirmUploadAdmin(admin.ModelAdmin):
+    list_display = ['id', 'vendor', 'original_filename', 'status', 'file_size_mb', 'uploaded_by', 'created_at']
+    list_filter = ['status', 'vendor', 'created_at']
+    search_fields = ['id', 'original_filename', 'vendor__name', 'uploaded_by__username']
+    readonly_fields = ['id', 'file_hash', 'created_at', 'processed_at', 'airparser_response_formatted', 'extracted_data_formatted']
+    
+    fieldsets = (
+        ('Upload Information', {
+            'fields': ('id', 'vendor', 'uploaded_by', 'original_filename', 'file_size', 'file_hash')
+        }),
+        ('Processing Status', {
+            'fields': ('status', 'airparser_job_id', 'error_message')
+        }),
+        ('AirParser Response', {
+            'fields': ('airparser_response_formatted', 'extracted_data_formatted'),
+            'classes': ('collapse',)
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'processed_at')
+        })
+    )
+    
+    def file_size_mb(self, obj):
+        if obj.file_size:
+            mb = obj.file_size / (1024 * 1024)
+            return f"{mb:.2f} MB"
+        return "Unknown"
+    file_size_mb.short_description = 'File Size'
+    
+    def airparser_response_formatted(self, obj):
+        if obj.airparser_response:
+            formatted = json.dumps(obj.airparser_response, indent=2)
+            return format_html('<pre style="white-space: pre-wrap;">{}</pre>', formatted)
+        return "No response data"
+    airparser_response_formatted.short_description = 'AirParser Response'
+    
+    def extracted_data_formatted(self, obj):
+        if obj.extracted_data:
+            formatted = json.dumps(obj.extracted_data, indent=2)
+            return format_html('<pre style="white-space: pre-wrap;">{}</pre>', formatted)
+        return "No extracted data"
+    extracted_data_formatted.short_description = 'Extracted Data'
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('vendor', 'uploaded_by')
+```
+
+---
+
+## 🚀 6. Implementation Steps
+
+### **Step 1: Update Database**
+```bash
+# Create and run migrations
+python manage.py makemigrations inventory
+python manage.py migrate
+```
+
+### **Step 2: Configure AirParser**
+```python
+# In inventory/utils.py, update:
+AIRPARSER_CONFIG = {
+    'api_key': 'your_actual_airparser_api_key',  # Replace this
+    'api_url': 'https://api.airparser.com',
+    'timeout': 30,
+    'max_file_size': 20 * 1024 * 1024,
+}
+```
+
+### **Step 3: Create Test Supplier**
+```python
+# In Django admin or shell:
+from inventory.models import Vendor
+Vendor.objects.create(
+    id='test_vendor',
+    name='Test Vendor',
+    airparser_inbox_id='68bf19bf8fb7546120660a49',  # Your inbox ID
+    active=True
+)
+```
+
+### **Step 4: Test API Endpoints**
+```bash
+# Test vendor list
+curl http://localhost:8000/api/vendors/
+
+# Test file upload (with actual file)
+curl -X POST -F "file=@test.pdf" -F "vendor_id=test_vendor" http://localhost:8000/api/upload-po/
+```
+
+---
+
+## 📊 7. Frontend Integration
+
+The frontend remains the same, but you'll integrate it into your existing project structure. The key endpoints your frontend needs to call are:
+
+- `GET /api/vendors/` - Get vendor list
+- `POST /api/upload-po/` - Upload PDF file
+- `GET /api/upload-status/<uuid>/` - Check upload status
+
+---
+
+This approach integrates seamlessly with your single-app Django structure while providing the same functionality. Everything stays in your `inventory` app without creating additional apps or complexity!

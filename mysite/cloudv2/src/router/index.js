@@ -19,6 +19,11 @@ const routes = [
     path: '/marketingcalls',
     name: 'marketingCalls',
     component: () => import('../views/MarketingCalls.vue')
+  },
+  {
+    path: '/po-uploader',
+    name: 'POUploader',
+    component: () => import('../views/POUploaderView.vue')
   }
 ]
 

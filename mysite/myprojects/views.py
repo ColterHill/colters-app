@@ -2,13 +2,15 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import MarketingTracker
 from .api import MarketingTrackerSerializer
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect
 from intuitlib.enums import Scopes
-from django.http import HttpResponse
 from intuitlib.client import AuthClient
 from django.conf import settings
 from .models import QuickBooksToken
+import json
+import os
+from ringcentral import SDK
 # Create your views here.
 
 auth_client = AuthClient(
@@ -79,3 +81,67 @@ def qbo_callback(request):
     )
 
     return HttpResponse(f"Successfully connected to QBO for company {realm_id}")
+
+
+def ringcentral_recording_proxy(request, recording_id):
+    """
+    Proxy endpoint to stream RingCentral call recordings with authentication.
+    Usage: /ringcentral/recording/<recording_id>/
+    """
+    # Default credentials path - you can make this configurable via settings
+    credentials_path = os.path.expanduser('~/Downloads/rc-credentials.json')
+    user_name = 'Colter Hill'  # Default user - you can make this configurable
+    
+    try:
+        # Load credentials
+        with open(credentials_path, 'r') as f:
+            credentials = json.load(f)
+        
+        client_id = credentials.get('clientId')
+        client_secret = credentials.get('clientSecret')
+        server = credentials.get('server', 'https://platform.ringcentral.com')
+        jwt_tokens = credentials.get('jwt', {})
+        jwt_token = jwt_tokens.get(user_name)
+        
+        if not client_id or not client_secret or not jwt_token:
+            return JsonResponse({
+                'error': 'RingCentral credentials not configured'
+            }, status=500)
+        
+        # Initialize SDK and authenticate
+        sdk = SDK(client_id, client_secret, server)
+        platform = sdk.platform()
+        platform.login(jwt=jwt_token)
+        
+        # Fetch the recording content
+        # The recording path format: /restapi/v1.0/account/~/recording/{recording_id}/content
+        recording_path = f'/restapi/v1.0/account/~/recording/{recording_id}/content'
+        
+        try:
+            response = platform.get(recording_path)
+            recording_content = response.body()
+            
+            # Determine content type (RingCentral recordings are typically MP3 or WAV)
+            # Check response headers if available, otherwise default to MP3
+            content_type = 'audio/mpeg'  # Default to MP3
+            
+            # Create streaming response
+            http_response = HttpResponse(recording_content, content_type=content_type)
+            http_response['Content-Disposition'] = f'inline; filename="recording_{recording_id}.mp3"'
+            http_response['Content-Length'] = str(len(recording_content))
+            
+            return http_response
+            
+        except Exception as e:
+            return JsonResponse({
+                'error': f'Failed to fetch recording: {str(e)}'
+            }, status=500)
+            
+    except FileNotFoundError:
+        return JsonResponse({
+            'error': 'RingCentral credentials file not found'
+        }, status=500)
+    except Exception as e:
+        return JsonResponse({
+            'error': f'Error accessing recording: {str(e)}'
+        }, status=500)

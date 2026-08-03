@@ -12,10 +12,8 @@ import Nora from '@primevue/themes/nora'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import Menubar from 'primevue/menubar'
-import 'primevue/resources/themes/saga-blue/theme.css'; // Choose your preferred theme
-import 'primevue/resources/primevue.min.css'; 
-import 'primeicons/primeicons.css'; 
-import 'primeflex/primeflex.css'; // If PrimeFlex is needed
+import 'primeicons/primeicons.css'
+import 'primeflex/primeflex.css'
 
 import '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/free-brands-svg-icons'
@@ -26,7 +24,11 @@ library.add(fas)
 
 const app = createApp(App)
 
-app.use(PrimeVue)
+app.use(PrimeVue, {
+    theme: {
+        preset: Aura
+    }
+})
 
 app.use(router)
 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'myprojects',
     'payment_processing',
     'users',
+    'po_processing',
     'phonenumber_field',
 ]
 

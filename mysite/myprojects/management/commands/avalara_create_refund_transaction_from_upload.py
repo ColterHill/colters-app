@@ -9,6 +9,15 @@ import requests
 import csv
 from pathlib import Path
 
+# SaleType: 2 = will-call (use branch address), 3 = delivery (use customer address)
+SALE_TYPE_WILL_CALL = 2
+SALE_TYPE_DELIVERY = 3
+
+# State tax only (permit): effective rate band around CO state 2.9%
+STATE_TAX_ONLY_RATE_MIN = 0.025
+STATE_TAX_ONLY_RATE_MAX = 0.035
+
+
 class Command(BaseCommand):
     help = "Import credit notes (refunds) from CSV and send transactions to Avalara as ReturnInvoice"
 
@@ -21,6 +30,22 @@ class Command(BaseCommand):
 
         df.columns = df.columns.str.strip()
         df.fillna("", inplace=True)
+
+        if "SaleType" not in df.columns:
+            self.stdout.write(
+                self.style.ERROR("CSV must contain a SaleType column (2=will-call, 3=delivery).")
+            )
+            return
+
+        # Convert CreditNoteID and CustomerID to integers to avoid float representation (.0)
+        df['CreditNoteID'] = df['CreditNoteID'].astype(int)
+        df['CustomerID'] = df['CustomerID'].astype(int)
+        df["SaleType"] = df["SaleType"].astype(int)
+
+        # Ensure delivery columns are filled for address logic
+        for col in ["DeliveryAddressLine1", "DeliveryCity", "DeliveryCounty", "DeliveryPostCode"]:
+            if col in df.columns:
+                df[col] = df[col].fillna("")
 
         account_number = 2000899182
         license_key = "CFF176791390F51C"
@@ -80,23 +105,59 @@ class Command(BaseCommand):
                     "postalCode": "80033",
                 }
 
-            # Use structured delivery address if present
-            if first["DeliveryAddressLine1"]:
-                ship_to = {
-                    "line1": first["DeliveryAddressLine1"],
-                    "city": first["DeliveryCity"],
-                    "region": first["DeliveryCounty"],
-                    "country": "US",
-                    "postalCode": first["DeliveryPostCode"]
-                }
-            else:
+            # Ship-to: SaleType 2 = will-call (branch address), 3 = delivery (customer address or fallback to branch)
+            sale_type = int(first["SaleType"])
+            if sale_type == SALE_TYPE_WILL_CALL:
                 ship_to = ship_from.copy()
+            elif sale_type == SALE_TYPE_DELIVERY:
+                if first["DeliveryAddressLine1"]:
+                    ship_to = {
+                        "line1": first["DeliveryAddressLine1"],
+                        "city": first["DeliveryCity"],
+                        "region": first["DeliveryCounty"],
+                        "country": "US",
+                        "postalCode": str(first["DeliveryPostCode"]).strip() or ship_from["postalCode"],
+                    }
+                else:
+                    ship_to = ship_from.copy()
+            else:
+                if first["DeliveryAddressLine1"]:
+                    ship_to = {
+                        "line1": first["DeliveryAddressLine1"],
+                        "city": first["DeliveryCity"],
+                        "region": first["DeliveryCounty"],
+                        "country": "US",
+                        "postalCode": str(first["DeliveryPostCode"]).strip() or ship_from["postalCode"],
+                    }
+                else:
+                    ship_to = ship_from.copy()
 
-            # Build line items
+            # Detect state tax only (permit): effective rate ~2.9% (before building lines so we can set override per line)
+            taxable_amount = sum(
+                float(row["TotalAmount"])
+                for _, row in group.iterrows()
+                if "DC - Delivery Charge" not in str(row["Description"])
+            )
+            if taxable_amount > 0:
+                effective_rate = total_tax / taxable_amount
+                is_state_tax_only = (
+                    STATE_TAX_ONLY_RATE_MIN <= effective_rate <= STATE_TAX_ONLY_RATE_MAX
+                )
+            else:
+                effective_rate = 0.0
+                is_state_tax_only = False
+
+            self.stdout.write(
+                f"[Credit {credit_id}] Tax: total=${total_tax:.2f}, taxable=${taxable_amount:.2f}, "
+                f"effective rate={effective_rate * 100:.2f}% → state tax only: {'Yes' if is_state_tax_only else 'No'}"
+            )
+
+            # Build line items; for state-tax-only, add tax override on each line (Avalara applies override at line level)
             lines = []
             for _, row in group.iterrows():
                 description = str(row["Description"])
                 product_code = str(row["ProductID"])
+                line_tax = float(row["TotalTax"])
 
                 if "DC - Delivery Charge" in description:
                     tax_code = "NT"
@@ -104,14 +165,21 @@ class Command(BaseCommand):
                 else:
                     tax_code = "P0000000"
 
-                lines.append({
+                line_dict = {
                     "number": str(row["CreditNoteLineID"]),
                     "quantity": int(row["Quantity"]),
                     "amount": -1 * float(row["TotalAmount"]),
                     "taxCode": tax_code,
                     "itemCode": product_code,
                     "description": description
-                })
+                }
+                if is_state_tax_only:
+                    line_dict["taxOverride"] = {
+                        "type": "TaxAmount",
+                        "taxAmount": line_tax,
+                        "reason": "State tax only (2.9% permit)"
+                    }
+                lines.append(line_dict)
 
             transaction_data = {
                 "type": "ReturnInvoice",
